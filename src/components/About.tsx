@@ -9,21 +9,21 @@ export default function About() {
   ];
 
   return (
-    <section id="sobre" className="py-24 bg-dark-lighter relative overflow-hidden">
+    <section id="sobre" className="py-24 bg-light-bg-secondary dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-accent/20"></div>
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
             Quem é o <span className="text-gradient">Vini</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+          <div className="space-y-6 text-lg text-light-text-secondary dark:text-gray-300 leading-relaxed transition-colors duration-300">
             <p>
               Meu interesse por tecnologia começou cedo, pela curiosidade de entender como as coisas funcionam.
             </p>
@@ -41,10 +41,10 @@ export default function About() {
               return (
                 <div
                   key={index}
-                  className="bg-dark p-6 rounded-xl border border-dark-border hover:border-primary/50 transition-all duration-300 card-hover group"
+                  className="bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 card-hover group"
                 >
                   <Icon className={`w-10 h-10 ${value.color} mb-4 group-hover:scale-110 transition-transform`} />
-                  <h3 className="text-xl font-bold text-gray-100">{value.title}</h3>
+                  <h3 className="text-xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">{value.title}</h3>
                 </div>
               );
             })}

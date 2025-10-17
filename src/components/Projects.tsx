@@ -55,10 +55,10 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projetos" className="py-24 bg-dark-lighter relative overflow-hidden">
+    <section id="projetos" className="py-24 bg-light-bg-secondary dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
             Meus <span className="text-gradient">Projetos</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
@@ -67,24 +67,24 @@ export default function Projects() {
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-8">
             <Database className="w-8 h-8 text-primary" />
-            <h3 className="text-3xl font-bold text-gray-100">Sistemas</h3>
+            <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">Sistemas</h3>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {systems.map((project, index) => (
               <div
                 key={index}
-                className="bg-dark p-6 rounded-xl border border-dark-border hover:border-primary/50 transition-all duration-300 card-hover group"
+                className="bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 card-hover group"
               >
-                <h4 className="text-2xl font-bold mb-3 text-gray-100 group-hover:text-primary transition-colors">
+                <h4 className="text-2xl font-bold mb-3 text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors">
                   {project.title}
                 </h4>
-                <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
+                <p className="text-light-text-secondary dark:text-gray-400 mb-4 leading-relaxed transition-colors duration-300">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-dark-lighter text-primary text-sm font-semibold rounded-full border border-primary/30"
+                      className="px-3 py-1 bg-light-hover dark:bg-dark-lighter text-primary text-sm font-semibold rounded-full border border-primary/30 transition-colors duration-300"
                     >
                       {tech}
                     </span>
@@ -101,7 +101,7 @@ export default function Projects() {
                   </a>
                 )}
                 {!project.url && (
-                  <span className="inline-flex items-center gap-2 text-gray-500 text-sm">
+                  <span className="inline-flex items-center gap-2 text-light-text-secondary dark:text-gray-500 text-sm transition-colors duration-300">
                     Sistema Offline/Privado
                   </span>
                 )}
@@ -113,7 +113,7 @@ export default function Projects() {
         <div>
           <div className="flex items-center gap-3 mb-8">
             <Globe className="w-8 h-8 text-accent" />
-            <h3 className="text-3xl font-bold text-gray-100">Sites</h3>
+            <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">Sites</h3>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -123,19 +123,19 @@ export default function Projects() {
                 href={site.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-dark p-6 rounded-xl border border-dark-border hover:border-accent/50 transition-all duration-300 card-hover block"
+                className="group bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-accent/50 transition-all duration-300 card-hover block"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <h4 className="text-xl font-bold text-gray-100 group-hover:text-accent transition-colors flex-1">
+                  <h4 className="text-xl font-bold text-light-text-primary dark:text-gray-100 group-hover:text-accent transition-colors flex-1">
                     {site.title}
                   </h4>
-                  <ExternalLink className="w-5 h-5 text-gray-500 group-hover:text-accent transition-colors" />
+                  <ExternalLink className="w-5 h-5 text-light-text-secondary dark:text-gray-500 group-hover:text-accent transition-colors" />
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {site.tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-2 py-1 bg-dark-lighter text-gray-400 text-xs font-semibold rounded"
+                      className="px-2 py-1 bg-light-hover dark:bg-dark-lighter text-light-text-secondary dark:text-gray-400 text-xs font-semibold rounded transition-colors duration-300"
                     >
                       {tech}
                     </span>

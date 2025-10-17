@@ -26,10 +26,10 @@ export default function Timeline() {
   ];
 
   return (
-    <section id="trajetoria" className="py-24 bg-dark relative overflow-hidden">
+    <section id="trajetoria" className="py-24 bg-light-bg dark:bg-dark relative overflow-hidden transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
             Minha <span className="text-gradient">Trajetória</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
@@ -51,12 +51,12 @@ export default function Timeline() {
                   } flex-col gap-8`}
                 >
                   <div className={`w-full md:w-5/12 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
-                    <div className="bg-dark-lighter p-6 rounded-xl border border-dark-border hover:border-primary/50 transition-all duration-300 card-hover">
+                    <div className="bg-light-card dark:bg-dark-lighter p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 card-hover">
                       <div className={`inline-block px-4 py-1 rounded-full bg-gradient-to-r ${event.color} text-white font-bold text-sm mb-4`}>
                         {event.year}
                       </div>
-                      <h3 className="text-2xl font-bold mb-3 text-gray-100">{event.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{event.description}</p>
+                      <h3 className="text-2xl font-bold mb-3 text-light-text-primary dark:text-gray-100 transition-colors duration-300">{event.title}</h3>
+                      <p className="text-light-text-secondary dark:text-gray-400 leading-relaxed transition-colors duration-300">{event.description}</p>
                     </div>
                   </div>
 

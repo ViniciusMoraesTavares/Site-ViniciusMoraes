@@ -37,18 +37,18 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contato" className="py-24 bg-dark-lighter relative overflow-hidden">
+    <section id="contato" className="py-24 bg-light-card dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-primary to-accent rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
             Vamos <span className="text-gradient">Conversar?</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-gray-300">
+          <p className="text-xl text-light-text-secondary dark:text-gray-300 transition-colors duration-300">
             Aberto a novas ideias, projetos e boas conversas sobre código.
           </p>
         </div>
@@ -62,15 +62,15 @@ export default function Contact() {
                 href={contact.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group bg-dark p-6 rounded-xl border border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover`}
+                className={`group bg-light-bg dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover`}
               >
                 <div className="flex items-center gap-4">
-                  <div className="p-3 bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform">
+                  <div className="p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform">
                     <Icon className={`w-6 h-6 ${contact.color}`} />
                   </div>
                   <div className="flex-1 text-left">
-                    <p className="text-sm text-gray-500 mb-1">{contact.label}</p>
-                    <p className="font-semibold text-gray-100 group-hover:text-primary transition-colors">
+                    <p className="text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contact.label}</p>
+                    <p className="font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors">
                       {contact.value}
                     </p>
                   </div>

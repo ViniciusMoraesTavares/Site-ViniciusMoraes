@@ -6,19 +6,22 @@ import Projects from './components/Projects';
 import Technologies from './components/Technologies';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-dark">
-      <Navigation />
-      <Hero />
-      <About />
-      <Timeline />
-      <Projects />
-      <Technologies />
-      <Contact />
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <div className="min-h-screen bg-light-bg dark:bg-dark transition-colors duration-300">
+        <Navigation />
+        <Hero />
+        <About />
+        <Timeline />
+        <Projects />
+        <Technologies />
+        <Contact />
+        <Footer />
+      </div>
+    </ThemeProvider>
   );
 }
 

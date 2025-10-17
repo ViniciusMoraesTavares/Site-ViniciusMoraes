@@ -3,30 +3,90 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light theme variables */
+    --color-bg: 255 255 255;
+    --color-bg-secondary: 248 250 252;
+    --color-card: 255 255 255;
+    --color-hover: 241 245 249;
+    --color-border: 226 232 240;
+    --color-text-primary: 30 41 59;
+    --color-text-secondary: 100 116 139;
+    --color-shadow: 0 0 0;
+  }
+
+  [data-theme="dark"] {
+    /* Dark theme variables */
+    --color-bg: 15 15 15;
+    --color-bg-secondary: 31 41 55;
+    --color-card: 31 41 55;
+    --color-hover: 55 65 81;
+    --color-border: 55 65 81;
+    --color-text-primary: 249 250 251;
+    --color-text-secondary: 156 163 175;
+    --color-shadow: 0 0 0;
+  }
+
   * {
     @apply scroll-smooth;
   }
 
   body {
-    @apply font-body text-gray-100 bg-dark;
+    @apply font-body transition-colors duration-300;
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text-primary));
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    color: rgb(var(--color-text-primary));
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent;
   }
 
   .glow {
-    text-shadow: 0 0 20px rgba(132, 204, 22, 0.3);
+    /* glow em azul real */
+    text-shadow: 0 0 20px rgba(30, 64, 175, 0.3);
   }
 
   .card-hover {
     @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+  }
+
+  .theme-transition {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  .bg-theme {
+    background-color: rgb(var(--color-bg));
+  }
+
+  .bg-theme-secondary {
+    background-color: rgb(var(--color-bg-secondary));
+  }
+
+  .bg-theme-card {
+    background-color: rgb(var(--color-card));
+  }
+
+  .bg-theme-hover {
+    background-color: rgb(var(--color-hover));
+  }
+
+  .border-theme {
+    border-color: rgb(var(--color-border));
+  }
+
+  .text-theme-primary {
+    color: rgb(var(--color-text-primary));
+  }
+
+  .text-theme-secondary {
+    color: rgb(var(--color-text-secondary));
   }
 
   .animate-fade-in {
