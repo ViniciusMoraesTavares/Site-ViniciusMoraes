@@ -2,19 +2,6 @@
 
 ## 🚀 Alta Prioridade (Implementar Primeiro)
 
-### 🌙 Dark/Light Mode
-- [ ] Criar contexto para gerenciamento de tema
-- [ ] Implementar toggle de tema no header
-- [ ] Definir variáveis CSS para cores dark/light
-- [ ] Atualizar todos os componentes para suportar tema escuro
-- [ ] Adicionar persistência do tema no localStorage
-- [ ] Testar responsividade em ambos os temas
-
-### 🔗 Links Funcionais de Contato
-- [ ] Atualizar link do GitHub no componente Contact
-- [ ] Atualizar link do LinkedIn no componente Contact
-- [ ] Verificar se todos os links estão funcionando corretamente
-- [ ] Adicionar target="_blank" e rel="noopener noreferrer" para links externos
 
 ### 📚 Case Studies Detalhados
 - [ ] Reestruturar componente Projects para formato de case study

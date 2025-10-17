@@ -1,9 +1,9 @@
-import { Mail, Instagram, Github, Linkedin, Send } from 'lucide-react';
+import { FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
 
 export default function Contact() {
   const contacts = [
     {
-      icon: Mail,
+      icon: FaEnvelope,
       label: 'E-mail',
       value: 'viniciusmoraestavares2020@gmail.com',
       href: 'mailto:viniciusmoraestavares2020@gmail.com',
@@ -11,26 +11,34 @@ export default function Contact() {
       hoverColor: 'hover:bg-primary/10 hover:border-primary',
     },
     {
-      icon: Instagram,
+      icon: FaWhatsapp,
+      label: 'WhatsApp',
+      value: '(19) 98245-7962',
+      href: 'https://wa.me/5519982457962?text=Ol%C3%A1%2C%20vim%20atrav%C3%A9s%20do%20seu%20site',
+      color: 'text-green-500',
+      hoverColor: 'hover:bg-green-500/10 hover:border-green-500',
+    },
+    {
+      icon: FaInstagram,
       label: 'Instagram',
       value: '@vini.mooraes',
-      href: 'https://instagram.com/vini.mooraes',
+      href: 'https://www.instagram.com/vini.mooraes/',
       color: 'text-pink-500',
       hoverColor: 'hover:bg-pink-500/10 hover:border-pink-500',
     },
     {
-      icon: Github,
+      icon: FaGithub,
       label: 'GitHub',
-      value: 'GitHub',
-      href: '#',
+      value: 'ViniciusMoraesTavares',
+      href: 'https://github.com/ViniciusMoraesTavares',
       color: 'text-gray-400',
       hoverColor: 'hover:bg-gray-400/10 hover:border-gray-400',
     },
     {
-      icon: Linkedin,
+      icon: FaLinkedin,
       label: 'LinkedIn',
-      value: 'LinkedIn',
-      href: '#',
+      value: 'Vinicius Moraes',
+      href: 'https://www.linkedin.com/in/vinicius-moraes-25992b217/',
       color: 'text-accent',
       hoverColor: 'hover:bg-accent/10 hover:border-accent',
     },
@@ -78,16 +86,6 @@ export default function Contact() {
               </a>
             );
           })}
-        </div>
-
-        <div className="text-center">
-          <a
-            href="mailto:viniciusmoraestavares2020@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-dark font-bold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-primary/50"
-          >
-            <Send className="w-5 h-5" />
-            Enviar Mensagem
-          </a>
         </div>
       </div>
     </section>
