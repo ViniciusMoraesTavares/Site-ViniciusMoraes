@@ -52,7 +52,8 @@ export default function Technologies() {
   ];
 
   return (
-    <section id="tecnologias" className="py-24 bg-light-bg dark:bg-dark relative overflow-hidden transition-colors duration-300">
+    <section id="tecnologias" className="py-24 gradient-cool relative overflow-hidden">
+      <div className="absolute inset-0 texture-dots opacity-20"></div>
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/30 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/30 rounded-full blur-3xl"></div>
@@ -60,10 +61,10 @@ export default function Technologies() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
-            Stack e <span className="text-gradient">Ferramentas</span>
+          <h2 className="text-heading-xl mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+            Stack e <span className="gradient-text-accent">Ferramentas</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+          <div className="w-24 h-1 gradient-border mx-auto rounded-full"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -72,27 +73,27 @@ export default function Technologies() {
             return (
               <div
                 key={index}
-                className={`bg-light-card dark:bg-dark-lighter p-8 rounded-xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-300 card-hover`}
+                className={`glass-card glass-card-dark padding-xl rounded-2xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-300 card-hover`}
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 bg-light-hover dark:bg-dark rounded-lg transition-colors duration-300">
+                  <div className="p-3 glass-button rounded-lg transition-colors duration-300">
                     <Icon className={`w-8 h-8 ${stack.color}`} />
                   </div>
-                  <h3 className="text-2xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">{stack.category}</h3>
+                  <h3 className="text-heading-md text-light-text-primary dark:text-gray-100 transition-colors duration-300">{stack.category}</h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-md">
                   {stack.technologies.map((tech, i) => (
                     <div
                       key={i}
-                      className="group p-4 bg-light-hover dark:bg-dark rounded-lg border border-light-border dark:border-dark-border hover:border-primary/30 transition-all duration-300 cursor-pointer"
+                      className="group glass-button padding-md rounded-lg border border-light-border dark:border-dark-border hover:border-primary/30 transition-all duration-300 cursor-pointer"
                     >
                       <div className="flex items-start justify-between">
                         <div>
-                          <h4 className="font-bold text-light-text-primary dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
+                          <h4 className="text-body-lg font-bold text-light-text-primary dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
                             {tech.name}
                           </h4>
-                          <p className="text-sm text-light-text-secondary dark:text-gray-400 transition-colors duration-300">{tech.description}</p>
+                          <p className="text-caption text-light-text-secondary dark:text-gray-400 transition-colors duration-300">{tech.description}</p>
                         </div>
                       </div>
                     </div>
