@@ -2,16 +2,6 @@
 
 ## 🚀 Alta Prioridade (Implementar Primeiro)
 
-
-### 📚 Case Studies Detalhados
-- [ ] Reestruturar componente Projects para formato de case study
-- [ ] Adicionar seção "Problema/Desafio" para cada projeto
-- [ ] Incluir "Processo de Desenvolvimento" com etapas
-- [ ] Adicionar "Resultados/Métricas" quantificáveis
-- [ ] Incluir screenshots/demos mais detalhados
-- [ ] Documentar tecnologias específicas e justificativas
-- [ ] Criar layout responsivo para case studies expandidos
-
 ## 🎯 Média Prioridade
 
 ### 📖 Storytelling na Seção About
