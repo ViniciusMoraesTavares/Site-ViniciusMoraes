@@ -10,8 +10,8 @@ interface SEOHelmetProps {
 }
 
 const SEOHelmet = ({
-  title = "Vinícius Moraes Tavares - Desenvolvedor Frontend",
-  description = "Desenvolvedor Frontend especializado em React, TypeScript e tecnologias modernas. Criando experiências digitais incríveis com foco em performance e usabilidade.",
+  title = "Vinicius Moraes - Desenvolvedor Full Stack",
+  description = "Desenvolvedor Full Stack especializado em React, TypeScript e tecnologias modernas. Criando experiências digitais incríveis com foco em performance e usabilidade.",
   keywords = "desenvolvedor frontend, react, typescript, javascript, web development, portfolio, vinícius moraes tavares",
   image = "/images/og-image.jpg",
   url = "https://viniciusmoraes.dev",
