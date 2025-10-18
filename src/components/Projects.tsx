@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaDatabase, FaExternalLinkAlt, FaGlobe, FaChevronDown, FaChevronUp, FaCode, FaChartLine, FaLightbulb, FaCog, FaRocket, FaUsers, FaClock, FaCheckCircle } from 'react-icons/fa';
+import AnimatedSection from './AnimatedSection';
 
 interface CaseStudy {
   id: string;
@@ -317,77 +318,83 @@ export default function Projects() {
   return (
     <section id="projetos" className="py-24 bg-light-bg-secondary dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
-            Estudos de <span className="text-gradient">Caso</span>
-          </h2>
-          <p className="text-xl text-light-text-secondary dark:text-gray-400 mb-6 max-w-3xl mx-auto">
-            Análises detalhadas dos projetos desenvolvidos, incluindo desafios, soluções e resultados alcançados
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
-        </div>
+        <AnimatedSection animation="fade-in" delay={100}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+              Estudos de <span className="text-gradient">Caso</span>
+            </h2>
+            <p className="text-xl text-light-text-secondary dark:text-gray-400 mb-6 max-w-3xl mx-auto">
+              Análises detalhadas dos projetos desenvolvidos, incluindo desafios, soluções e resultados alcançados
+            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+          </div>
+        </AnimatedSection>
 
         {/* Estudos de Caso Detalhados */}
         <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <FaLightbulb className="w-8 h-8 text-primary" />
-            <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
-              Estudos de Caso Detalhados
-            </h3>
-          </div>
+          <AnimatedSection animation="slide-in-left" delay={200}>
+            <div className="flex items-center gap-3 mb-8">
+              <FaLightbulb className="w-8 h-8 text-primary hover-magnetic" />
+              <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
+                Estudos de Caso Detalhados
+              </h3>
+            </div>
+          </AnimatedSection>
 
           <div className="space-y-8">
-            {caseStudies.map((caseStudy) => {
+            {caseStudies.map((caseStudy, index) => {
               const Icon = getCategoryIcon(caseStudy.category);
               const isExpanded = expandedCase === caseStudy.id;
 
               return (
-                <div
+                <AnimatedSection 
                   key={caseStudy.id}
-                  className="bg-light-card dark:bg-dark rounded-xl border border-light-border dark:border-dark-border overflow-hidden transition-all duration-300 hover:border-primary/50"
+                  animation="slide-in-up"
+                  delay={300 + (index * 200)}
                 >
-                  {/* Header do Case Study */}
-                  <div className="p-6 border-b border-light-border dark:border-dark-border">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-start gap-4 flex-1">
-                        <div className="p-3 bg-primary/10 rounded-lg">
-                          <Icon className="w-6 h-6 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <h4 className="text-2xl font-bold text-light-text-primary dark:text-gray-100">
-                              {caseStudy.title}
-                            </h4>
-                            <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-gray-400">
-                              <FaClock className="w-4 h-4" />
-                              <span>{caseStudy.timeline}</span>
-                              <FaUsers className="w-4 h-4 ml-2" />
-                              <span>{caseStudy.teamSize} pessoa{caseStudy.teamSize > 1 ? 's' : ''}</span>
-                            </div>
+                  <div className="bg-light-card dark:bg-dark rounded-xl border border-light-border dark:border-dark-border overflow-hidden transition-all duration-300 hover:border-primary/50 hover-lift hover-border-expand">
+                    {/* Header do Case Study */}
+                    <div className="p-6 border-b border-light-border dark:border-dark-border">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="p-3 bg-primary/10 rounded-lg hover-magnetic">
+                            <Icon className="w-6 h-6 text-primary" />
                           </div>
-                          <p className="text-light-text-secondary dark:text-gray-400 leading-relaxed mb-4">
-                            {caseStudy.overview}
-                          </p>
-                          {caseStudy.url && (
-                            <a
-                              href={caseStudy.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold transition-colors"
-                            >
-                              Ver Projeto <FaExternalLinkAlt className="w-4 h-4" />
-                            </a>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <h4 className="text-2xl font-bold text-light-text-primary dark:text-gray-100">
+                                {caseStudy.title}
+                              </h4>
+                              <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-gray-400">
+                                <FaClock className="w-4 h-4 hover-magnetic" />
+                                <span>{caseStudy.timeline}</span>
+                                <FaUsers className="w-4 h-4 ml-2 hover-magnetic" />
+                                <span>{caseStudy.teamSize} pessoa{caseStudy.teamSize > 1 ? 's' : ''}</span>
+                              </div>
+                            </div>
+                            <p className="text-light-text-secondary dark:text-gray-400 leading-relaxed mb-4">
+                              {caseStudy.overview}
+                            </p>
+                            {caseStudy.url && (
+                              <a
+                                href={caseStudy.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold transition-colors hover-magnetic click-effect"
+                              >
+                                Ver Projeto <FaExternalLinkAlt className="w-4 h-4" />
+                              </a>
                           )}
                         </div>
                       </div>
                       <button
                         onClick={() => toggleExpanded(caseStudy.id)}
-                        className="p-2 hover:bg-light-hover dark:hover:bg-dark-lighter rounded-lg transition-colors"
+                        className="p-2 hover:bg-light-hover dark:hover:bg-dark-lighter rounded-lg transition-colors hover-lift click-effect"
                       >
                         {isExpanded ? (
-                          <FaChevronUp className="w-5 h-5 text-light-text-secondary dark:text-gray-400" />
+                          <FaChevronUp className="w-5 h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic" />
                         ) : (
-                          <FaChevronDown className="w-5 h-5 text-light-text-secondary dark:text-gray-400" />
+                          <FaChevronDown className="w-5 h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic" />
                         )}
                       </button>
                     </div>
@@ -395,16 +402,16 @@ export default function Projects() {
 
                   {/* Conteúdo Expandido */}
                   {isExpanded && (
-                    <div className="p-6 space-y-8">
+                    <div className="p-6 space-y-8 animate-fade-in">
                       {/* Problema/Desafio */}
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <FaLightbulb className="w-5 h-5 text-red-500" />
+                          <FaLightbulb className="w-5 h-5 text-red-500 hover-magnetic" />
                           <h5 className="text-xl font-bold text-light-text-primary dark:text-gray-100">
                             Problema/Desafio
                           </h5>
                         </div>
-                        <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg mb-4">
+                        <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg mb-4 hover-lift">
                           <p className="text-light-text-secondary dark:text-gray-300 leading-relaxed">
                             {caseStudy.problem.context}
                           </p>
@@ -416,7 +423,7 @@ export default function Projects() {
                             </h6>
                             <ul className="space-y-2">
                               {caseStudy.problem.challenges.map((challenge, index) => (
-                                <li key={index} className="flex items-start gap-2">
+                                <li key={index} className="flex items-start gap-2 hover-lift">
                                   <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
                                   <span className="text-light-text-secondary dark:text-gray-400">{challenge}</span>
                                 </li>
@@ -429,8 +436,8 @@ export default function Projects() {
                             </h6>
                             <ul className="space-y-2">
                               {caseStudy.problem.stakeholders.map((stakeholder, index) => (
-                                <li key={index} className="flex items-center gap-2">
-                                  <FaUsers className="w-4 h-4 text-primary" />
+                                <li key={index} className="flex items-center gap-2 hover-lift">
+                                  <FaUsers className="w-4 h-4 text-primary hover-magnetic" />
                                   <span className="text-light-text-secondary dark:text-gray-400">{stakeholder}</span>
                                 </li>
                               ))}
@@ -583,6 +590,7 @@ export default function Projects() {
                     </div>
                   )}
                 </div>
+                </AnimatedSection>
               );
             })}
           </div>
@@ -590,42 +598,49 @@ export default function Projects() {
 
         {/* Sites Desenvolvidos */}
         <div>
-          <div className="flex items-center gap-3 mb-8">
-            <FaGlobe className="w-8 h-8 text-accent" />
-            <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
-              Sites Desenvolvidos
-            </h3>
-          </div>
+          <AnimatedSection animation="slide-in-right" delay={400}>
+            <div className="flex items-center gap-3 mb-8">
+              <FaGlobe className="w-8 h-8 text-accent hover-magnetic" />
+              <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
+                Sites Desenvolvidos
+              </h3>
+            </div>
+          </AnimatedSection>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {websites.map((site, index) => (
-              <a
+              <AnimatedSection 
                 key={index}
-                href={site.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-accent/50 transition-all duration-300 card-hover block"
+                animation="scale-in"
+                delay={500 + (index * 100)}
               >
-                <div className="flex items-start justify-between mb-3">
-                  <h4 className="text-xl font-bold text-light-text-primary dark:text-gray-100 group-hover:text-accent transition-colors flex-1">
-                    {site.title}
-                  </h4>
-                  <FaExternalLinkAlt className="w-5 h-5 text-light-text-secondary dark:text-gray-500 group-hover:text-accent transition-colors" />
-                </div>
-                <p className="text-sm text-light-text-secondary dark:text-gray-400 mb-4">
-                  {site.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {site.tech.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-2 py-1 bg-light-hover dark:bg-dark-lighter text-light-text-secondary dark:text-gray-400 text-xs font-semibold rounded transition-colors duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </a>
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-accent/50 transition-all duration-300 card-hover block hover-lift hover-border-expand click-effect"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="text-xl font-bold text-light-text-primary dark:text-gray-100 group-hover:text-accent transition-colors flex-1">
+                      {site.title}
+                    </h4>
+                    <FaExternalLinkAlt className="w-5 h-5 text-light-text-secondary dark:text-gray-500 group-hover:text-accent transition-colors hover-magnetic" />
+                  </div>
+                  <p className="text-sm text-light-text-secondary dark:text-gray-400 mb-4">
+                    {site.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {site.tech.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-light-hover dark:bg-dark-lighter text-light-text-secondary dark:text-gray-400 text-xs font-semibold rounded transition-colors duration-300 hover-lift"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </a>
+              </AnimatedSection>
             ))}
           </div>
         </div>

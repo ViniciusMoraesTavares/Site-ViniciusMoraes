@@ -1,4 +1,5 @@
-import { FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
+import AnimatedSection from './AnimatedSection';
 
 export default function Contact() {
   const contacts = [
@@ -51,39 +52,46 @@ export default function Contact() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
-            Vamos <span className="text-gradient">Conversar?</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-xl text-light-text-secondary dark:text-gray-300 transition-colors duration-300">
-            Aberto a novas ideias, projetos e boas conversas sobre código.
-          </p>
-        </div>
+        <AnimatedSection animation="fade-in" delay={100}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+              Vamos <span className="text-gradient">Conversar?</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-6"></div>
+            <p className="text-xl text-light-text-secondary dark:text-gray-300 transition-colors duration-300">
+              Aberto a novas ideias, projetos e boas conversas sobre código.
+            </p>
+          </div>
+        </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 gap-6 mb-12">
           {contacts.map((contact, index) => {
             const Icon = contact.icon;
             return (
-              <a
+              <AnimatedSection 
                 key={index}
-                href={contact.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group bg-light-bg dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover`}
+                animation="scale-in"
+                delay={200 + (index * 100)}
               >
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform">
-                    <Icon className={`w-6 h-6 ${contact.color}`} />
+                <a
+                  href={contact.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group bg-light-bg dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover hover-lift hover-border-expand click-effect`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform hover-magnetic">
+                      <Icon className={`w-6 h-6 ${contact.color}`} />
+                    </div>
+                    <div className="flex-1 text-left">
+                      <p className="text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contact.label}</p>
+                      <p className="font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors">
+                        {contact.value}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 text-left">
-                    <p className="text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contact.label}</p>
-                    <p className="font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors">
-                      {contact.value}
-                    </p>
-                  </div>
-                </div>
-              </a>
+                </a>
+              </AnimatedSection>
             );
           })}
         </div>

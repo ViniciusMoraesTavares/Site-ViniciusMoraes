@@ -1,12 +1,5 @@
 # 📋 Checklist de Melhorias - Portfólio Vinícius Moraes
 
-### ✨ Micro-interações Avançadas
-- [ ] Implementar hover effects mais sofisticados
-- [ ] Adicionar loading states para transições
-- [ ] Criar parallax sutil no hero section
-- [ ] Implementar animações de entrada dinâmicas
-- [ ] Adicionar feedback visual para interações
-
 ### 🎭 Elementos 3D e Visuais
 - [ ] Adicionar elementos 3D sutis (sem exagerar)
 - [ ] Implementar background patterns para profundidade

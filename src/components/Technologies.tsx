@@ -1,4 +1,5 @@
 import { Database, Code, Layers, Wrench } from 'lucide-react';
+import AnimatedSection from './AnimatedSection';
 
 export default function Technologies() {
   const techStack = [
@@ -60,46 +61,56 @@ export default function Technologies() {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-heading-xl mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
-            Stack e <span className="gradient-text-accent">Ferramentas</span>
-          </h2>
-          <div className="w-24 h-1 gradient-border mx-auto rounded-full"></div>
-        </div>
+        <AnimatedSection animation="slide-in-up" delay={100}>
+          <div className="text-center mb-16">
+            <h2 className="text-heading-xl mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+              Stack e <span className="gradient-text-accent">Ferramentas</span>
+            </h2>
+            <div className="w-24 h-1 gradient-border mx-auto rounded-full"></div>
+          </div>
+        </AnimatedSection>
 
         <div className="grid md:grid-cols-2 gap-8">
           {techStack.map((stack, index) => {
             const Icon = stack.icon;
             return (
-              <div
+              <AnimatedSection 
                 key={index}
-                className={`glass-card glass-card-dark padding-xl rounded-2xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-300 card-hover`}
+                animation={index % 2 === 0 ? 'slide-in-left' : 'slide-in-right'}
+                delay={200 + (index * 150)}
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="p-3 glass-button rounded-lg transition-colors duration-300">
-                    <Icon className={`w-8 h-8 ${stack.color}`} />
-                  </div>
-                  <h3 className="text-heading-md text-light-text-primary dark:text-gray-100 transition-colors duration-300">{stack.category}</h3>
-                </div>
-
-                <div className="space-y-md">
-                  {stack.technologies.map((tech, i) => (
-                    <div
-                      key={i}
-                      className="group glass-button padding-md rounded-lg border border-light-border dark:border-dark-border hover:border-primary/30 transition-all duration-300 cursor-pointer"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h4 className="text-body-lg font-bold text-light-text-primary dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
-                            {tech.name}
-                          </h4>
-                          <p className="text-caption text-light-text-secondary dark:text-gray-400 transition-colors duration-300">{tech.description}</p>
-                        </div>
-                      </div>
+                <div
+                  className={`glass-card glass-card-dark padding-xl rounded-2xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-300 hover-lift hover-border-expand`}
+                >
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 glass-button rounded-lg transition-colors duration-300 hover-magnetic">
+                      <Icon className={`w-8 h-8 ${stack.color}`} />
                     </div>
-                  ))}
+                    <h3 className="text-heading-md text-light-text-primary dark:text-gray-100 transition-colors duration-300">{stack.category}</h3>
+                  </div>
+
+                  <div className="space-y-md">
+                    {stack.technologies.map((tech, i) => (
+                      <AnimatedSection
+                        key={i}
+                        animation="scale-in"
+                        delay={400 + (index * 150) + (i * 100)}
+                      >
+                        <div className="group glass-button padding-md rounded-lg border border-light-border dark:border-dark-border hover:border-primary/30 transition-all duration-300 cursor-pointer hover-tilt click-effect">
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <h4 className="text-body-lg font-bold text-light-text-primary dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
+                                {tech.name}
+                              </h4>
+                              <p className="text-caption text-light-text-secondary dark:text-gray-400 transition-colors duration-300">{tech.description}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </AnimatedSection>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             );
           })}
         </div>
