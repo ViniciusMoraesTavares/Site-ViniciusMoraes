@@ -1,3 +1,4 @@
+import React from 'react';
 import { FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 import AnimatedSection from './AnimatedSection';
 
@@ -64,8 +65,9 @@ export default function Contact() {
           </div>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 gap-6 mb-12">
-          {contacts.map((contact, index) => {
+        {/* Primeiros 4 cards em grid responsivo */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          {contacts.slice(0, 4).map((contact, index) => {
             const Icon = contact.icon;
             return (
               <AnimatedSection 
@@ -77,15 +79,15 @@ export default function Contact() {
                   href={contact.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group bg-light-bg dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover hover-lift hover-border-expand click-effect`}
+                  className={`group bg-light-bg dark:bg-dark p-4 sm:p-6 rounded-xl border border-light-border dark:border-dark-border ${contact.hoverColor} transition-all duration-300 card-hover hover-lift hover-border-expand click-effect block w-full h-full ${contact.label === 'E-mail' ? 'overflow-visible' : ''}`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform hover-magnetic">
-                      <Icon className={`w-6 h-6 ${contact.color}`} />
+                  <div className="flex items-center gap-3 sm:gap-4 h-full">
+                    <div className="p-2 sm:p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform hover-magnetic flex-shrink-0">
+                      <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${contact.color}`} />
                     </div>
-                    <div className="flex-1 text-left">
-                      <p className="text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contact.label}</p>
-                      <p className="font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors">
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contact.label}</p>
+                      <p className={`text-sm sm:text-base font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors leading-tight ${contact.label === 'E-mail' ? 'whitespace-nowrap' : 'break-words'}`}>
                         {contact.value}
                       </p>
                     </div>
@@ -95,6 +97,37 @@ export default function Contact() {
             );
           })}
         </div>
+
+        {/* Card do LinkedIn centralizado */}
+        {contacts.length > 4 && (
+          <div className="flex justify-center">
+            <div className="w-full max-w-sm sm:max-w-md">
+              <AnimatedSection 
+                animation="scale-in"
+                delay={200 + (4 * 100)}
+              >
+                <a
+                  href={contacts[4].href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group bg-light-bg dark:bg-dark p-4 sm:p-6 rounded-xl border border-light-border dark:border-dark-border ${contacts[4].hoverColor} transition-all duration-300 card-hover hover-lift hover-border-expand click-effect block w-full`}
+                >
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="p-2 sm:p-3 bg-light-hover dark:bg-dark-lighter rounded-lg group-hover:scale-110 transition-transform hover-magnetic flex-shrink-0">
+                      {React.createElement(contacts[4].icon, { className: `w-5 h-5 sm:w-6 sm:h-6 ${contacts[4].color}` })}
+                    </div>
+                    <div className="flex-1 text-left min-w-0">
+                      <p className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-500 mb-1 transition-colors duration-300">{contacts[4].label}</p>
+                      <p className="text-sm sm:text-base font-semibold text-light-text-primary dark:text-gray-100 group-hover:text-primary transition-colors break-words leading-tight">
+                        {contacts[4].value}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </AnimatedSection>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
