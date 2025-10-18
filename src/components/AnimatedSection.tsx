@@ -3,7 +3,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface AnimatedSectionProps {
   children: ReactNode;
-  animation?: 'fade-in' | 'slide-in-left' | 'slide-in-right' | 'slide-in-up' | 'zoom-in' | 'reveal-up';
+  animation?: 'fade-in' | 'slide-in-left' | 'slide-in-right' | 'slide-in-up' | 'zoom-in' | 'reveal-up' | 'scale-in';
   delay?: number;
   className?: string;
   threshold?: number;
@@ -25,7 +25,8 @@ export default function AnimatedSection({
     'slide-in-right': 'slide-right',
     'slide-in-up': 'reveal-up',
     'zoom-in': 'zoom-in',
-    'reveal-up': 'reveal-up'
+    'reveal-up': 'reveal-up',
+    'scale-in': 'scale-in'
   };
 
   const mappedAnimation = animationMap[animation] || 'fade-in';
@@ -39,7 +40,8 @@ export default function AnimatedSection({
 
   return (
     <div 
-      ref={elementRef}
+      // This type casting is required to maintain compatibility with HTMLDivElement's ref property - do not remove or modify this without updating all related type definitions.
+      ref={elementRef as React.RefObject<HTMLDivElement>}
       className={`scroll-animate ${className}`}
     >
       {children}

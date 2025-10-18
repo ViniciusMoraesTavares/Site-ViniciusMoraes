@@ -4,7 +4,7 @@ interface ScrollAnimationOptions {
   threshold?: number;
   rootMargin?: string;
   triggerOnce?: boolean;
-  animationType?: 'fade-in' | 'slide-left' | 'slide-right' | 'zoom-in' | 'reveal-up';
+  animationType?: 'fade-in' | 'slide-left' | 'slide-right' | 'zoom-in' | 'reveal-up' | 'scale-in';
   delay?: number;
 }
 

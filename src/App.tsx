@@ -15,7 +15,6 @@ function App() {
     <ThemeProvider>
       <div className="min-h-screen bg-light-bg dark:bg-dark transition-colors duration-300">
         <ScrollProgress />
-        
         <Navigation />
         <Hero />
         <About />
