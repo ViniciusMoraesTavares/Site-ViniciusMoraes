@@ -3,9 +3,6 @@ import { useScrollProgress } from '../hooks/useScrollAnimation';
 export default function ScrollProgress() {
   const progress = useScrollProgress();
 
-  // Debug: log do progresso
-  console.log('ScrollProgress - progress:', progress);
-
   // Calculate color interpolation based on progress
   const getProgressColor = (progress: number) => {
     if (progress < 25) {

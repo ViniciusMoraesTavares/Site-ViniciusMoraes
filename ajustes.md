@@ -1,4 +1,4 @@
 ## Ajustes
-    - Resposividade do componente TimeLine
+    - Resposividade do estudo de caso
     - Melhorar o estilo do Hero
     - Melhorar o Footer

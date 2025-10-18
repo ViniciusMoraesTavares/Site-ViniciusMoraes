@@ -237,10 +237,10 @@ export default function About() {
             </h3>
           </AnimatedSection>
           <div className="relative">
-            {/* Timeline line */}
+            {/* Timeline line - centralizada para todos os tamanhos */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary to-accent rounded-full"></div>
 
-            <div className="space-y-12">
+            <div className="space-y-8 sm:space-y-12">
               {timeline.map((item, index) => {
                 const Icon = item.icon;
                 const isEven = index % 2 === 0;
@@ -248,31 +248,64 @@ export default function About() {
                 return (
                   <AnimatedSection 
                     key={index}
-                    animation={isEven ? "slide-in-left" : "slide-in-right"}
+                    animation="fade-in"
                     delay={1700 + (index * 200)}
                   >
-                    <div className={`flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
-                      <div className={`w-1/2 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-tilt click-effect shadow-sm dark:shadow-lg">
-                          <div className={`flex items-center mb-3 ${isEven ? 'justify-end' : 'justify-start'}`}>
-                            <Calendar className="w-4 h-4 text-primary mr-2 hover-magnetic" />
-                            <span className="text-primary font-bold text-lg">{item.year}</span>
+                    <div className="relative">
+                      {/* Layout Mobile e Tablet - Cards centralizados */}
+                      <div className="block lg:hidden">
+                        <div className="flex flex-col items-center">
+                          {/* Ícone central */}
+                          <div className="flex-shrink-0 mb-6 z-10 relative">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 hover-lift hover-magnetic transition-all duration-500 shadow-lg">
+                              <Icon className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
+                            </div>
                           </div>
-                          <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-500">{item.title}</h4>
-                          <p className="text-gray-600 dark:text-gray-400 mb-3 transition-colors duration-500">{item.description}</p>
-                          <div className={`flex items-center text-sm text-accent ${isEven ? 'justify-end' : 'justify-start'}`}>
-                            <MapPin className="w-4 h-4 mr-1 hover-magnetic" />
-                            {item.location}
+                          
+                          {/* Card centralizado */}
+                          <div className="w-full max-w-md mx-auto px-4">
+                            <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-tilt click-effect shadow-sm dark:shadow-lg text-center">
+                              <div className="flex items-center justify-center mb-4">
+                                <Calendar className="w-4 h-4 text-primary mr-2 hover-magnetic" />
+                                <span className="text-primary font-bold text-lg">{item.year}</span>
+                              </div>
+                              <h4 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 transition-colors duration-500 leading-tight">{item.title}</h4>
+                              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-4 transition-colors duration-500 leading-relaxed">{item.description}</p>
+                              <div className="flex items-center justify-center text-sm text-accent">
+                                <MapPin className="w-4 h-4 mr-1 hover-magnetic" />
+                                {item.location}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
 
-                      {/* Timeline dot */}
-                      <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 hover-lift hover-magnetic transition-all duration-500">
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
+                      {/* Layout Desktop - Alternado */}
+                      <div className="hidden lg:flex items-center">
+                        <div className={`flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
+                          <div className={`w-1/2 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                            <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-tilt click-effect shadow-sm dark:shadow-lg">
+                              <div className={`flex items-center mb-3 ${isEven ? 'justify-end' : 'justify-start'}`}>
+                                <Calendar className="w-4 h-4 text-primary mr-2 hover-magnetic" />
+                                <span className="text-primary font-bold text-lg">{item.year}</span>
+                              </div>
+                              <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-500">{item.title}</h4>
+                              <p className="text-gray-600 dark:text-gray-400 mb-3 transition-colors duration-500">{item.description}</p>
+                              <div className={`flex items-center text-sm text-accent ${isEven ? 'justify-end' : 'justify-start'}`}>
+                                <MapPin className="w-4 h-4 mr-1 hover-magnetic" />
+                                {item.location}
+                              </div>
+                            </div>
+                          </div>
 
-                      <div className="w-1/2"></div>
+                          {/* Timeline dot desktop */}
+                          <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 hover-lift hover-magnetic transition-all duration-500">
+                            <Icon className="w-6 h-6 text-white" />
+                          </div>
+
+                          <div className="w-1/2"></div>
+                        </div>
+                      </div>
                     </div>
                   </AnimatedSection>
                 );

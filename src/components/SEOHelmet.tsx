@@ -17,7 +17,7 @@ const SEOHelmet = ({
   url = "https://viniciusmoraes.dev",
   type = "website"
 }: SEOHelmetProps) => {
-  const fullTitle = title.includes("Vinícius") ? title : `${title} | Vinícius Moraes Tavares`;
+  const fullTitle = title.includes("Vinicius") ? title : `${title} | Vinicius Moraes Tavares`;
 
   return (
     <Helmet>
