@@ -1,3 +1,3 @@
 ## Ajustes
     - Melhorar o estilo do Hero
-    - Melhorar o Footer
+    - Melhorar as cores no ligth mode
