@@ -1,5 +1,6 @@
 import { Star, Heart, Lightbulb, Zap, GraduationCap, Code, Target, Clock, CheckCircle, ArrowRight, Calendar, MapPin, Award, Rocket, Briefcase, } from 'lucide-react';
 import AnimatedSection from './AnimatedSection';
+import { LazyImage } from './LazyImage';
 
 export default function About() {
   const values = [
@@ -137,10 +138,12 @@ export default function About() {
             <div className="order-2 lg:order-1 flex justify-center">
               <div className="relative hover-lift">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-lg opacity-20 dark:opacity-40 scale-105 transition-opacity duration-500"></div>
-                <img
+                <LazyImage
                   src="/images/foto_vinicius.png"
                   alt="Vinicius Moraes Tavares"
                   className="relative w-80 h-80 object-cover rounded-2xl shadow-xl dark:shadow-2xl border-4 border-gray-200 dark:border-gray-700 hover-magnetic transition-all duration-500"
+                  threshold={0.1}
+                  rootMargin="100px"
                 />
               </div>
             </div>
