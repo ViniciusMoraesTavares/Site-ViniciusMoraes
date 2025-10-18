@@ -81,35 +81,32 @@ export default function Timeline() {
                       </div>
                     </div>
 
-                    {/* Layout Desktop - Alternado */}
-                    <div className="hidden lg:flex items-center">
-                      <div className={`flex items-center w-full ${
-                        isLeft ? 'flex-row' : 'flex-row-reverse'
-                      }`}>
-                        {/* Conteúdo desktop */}
-                        <div className={`w-5/12 ${isLeft ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                          <div className="bg-light-card dark:bg-dark-lighter p-6 lg:p-8 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 card-hover shadow-sm hover:shadow-md">
-                            <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${event.color} text-white font-bold text-sm mb-4`}>
-                              {event.year}
+                    {/* Layout Desktop - Alternado com alinhamento perfeito */}
+                    <div className="hidden lg:block">
+                      <div className="relative flex items-center min-h-[200px]">
+                        {/* Card do lado esquerdo */}
+                        <div className={`absolute ${isLeft ? 'left-0 right-1/2 pr-12' : 'left-1/2 right-0 pl-12'}`}>
+                          <div className={`${isLeft ? 'text-right' : 'text-left'}`}>
+                            <div className="bg-light-card dark:bg-dark-lighter p-6 lg:p-8 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 card-hover shadow-sm hover:shadow-md">
+                              <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${event.color} text-white font-bold text-sm mb-4`}>
+                                {event.year}
+                              </div>
+                              <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-light-text-primary dark:text-gray-100 transition-colors duration-300 leading-tight">
+                                {event.title}
+                              </h3>
+                              <p className="text-base lg:text-lg text-light-text-secondary dark:text-gray-400 leading-relaxed transition-colors duration-300">
+                                {event.description}
+                              </p>
                             </div>
-                            <h3 className="text-2xl lg:text-3xl font-bold mb-4 text-light-text-primary dark:text-gray-100 transition-colors duration-300 leading-tight">
-                              {event.title}
-                            </h3>
-                            <p className="text-base lg:text-lg text-light-text-secondary dark:text-gray-400 leading-relaxed transition-colors duration-300">
-                              {event.description}
-                            </p>
                           </div>
                         </div>
 
-                        {/* Ícone central desktop */}
-                        <div className="w-2/12 flex justify-center">
-                          <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r ${event.color} flex items-center justify-center shadow-lg z-10 relative`}>
+                        {/* Ícone central - posicionado absolutamente no centro */}
+                        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                          <div className={`w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-r ${event.color} flex items-center justify-center shadow-lg border-4 border-white dark:border-gray-900`}>
                             <Icon className="w-8 h-8 lg:w-10 lg:h-10 text-white" />
                           </div>
                         </div>
-
-                        {/* Espaço vazio desktop */}
-                        <div className="w-5/12"></div>
                       </div>
                     </div>
                   </div>
