@@ -298,7 +298,21 @@ export default function Projects() {
   ];
 
   const toggleExpanded = (caseId: string) => {
+    const wasExpanded = expandedCase === caseId;
     setExpandedCase(expandedCase === caseId ? null : caseId);
+    
+    // Se estava expandido e agora está fechando, rola para a seção de estudos de caso
+    if (wasExpanded) {
+      setTimeout(() => {
+        const element = document.getElementById('estudos-caso-detalhados');
+        if (element) {
+          element.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }, 100); // Pequeno delay para permitir que a animação de fechamento inicie
+    }
   };
 
   const getCategoryIcon = (category: string) => {
@@ -317,31 +331,31 @@ export default function Projects() {
 
   return (
     <section id="projetos" className="py-24 bg-light-bg-secondary dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <AnimatedSection animation="fade-in" delay={100}>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
               Estudos de <span className="text-gradient">Caso</span>
             </h2>
-            <p className="text-xl text-light-text-secondary dark:text-gray-400 mb-6 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-light-text-secondary dark:text-gray-400 mb-6 max-w-3xl mx-auto px-4">
               Análises detalhadas dos projetos desenvolvidos, incluindo desafios, soluções e resultados alcançados
             </p>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            <div className="w-20 sm:w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
         </AnimatedSection>
 
         {/* Estudos de Caso Detalhados */}
-        <div className="mb-16">
+        <div id="estudos-caso-detalhados" className="mb-12 sm:mb-16">
           <AnimatedSection animation="slide-in-left" delay={200}>
-            <div className="flex items-center gap-3 mb-8">
-              <FaLightbulb className="w-8 h-8 text-primary hover-magnetic" />
-              <h3 className="text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6">
+              <FaLightbulb className="w-6 h-6 sm:w-8 sm:h-8 text-primary hover-magnetic flex-shrink-0" />
+              <h3 className="text-2xl sm:text-3xl font-bold text-light-text-primary dark:text-gray-100 transition-colors duration-300">
                 Estudos de Caso Detalhados
               </h3>
             </div>
           </AnimatedSection>
 
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {caseStudies.map((caseStudy, index) => {
               const Icon = getCategoryIcon(caseStudy.category);
               const isExpanded = expandedCase === caseStudy.id;
@@ -354,25 +368,29 @@ export default function Projects() {
                 >
                   <div className="bg-light-card dark:bg-dark rounded-xl border border-light-border dark:border-dark-border overflow-hidden transition-all duration-300 hover:border-primary/50 hover-lift hover-border-expand">
                     {/* Header do Case Study */}
-                    <div className="p-6 border-b border-light-border dark:border-dark-border">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start gap-4 flex-1">
-                          <div className="p-3 bg-primary/10 rounded-lg hover-magnetic">
-                            <Icon className="w-6 h-6 text-primary" />
+                    <div className="p-4 sm:p-6 border-b border-light-border dark:border-dark-border">
+                      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <div className="flex items-start gap-3 sm:gap-4 flex-1">
+                          <div className="p-2 sm:p-3 bg-primary/10 rounded-lg hover-magnetic flex-shrink-0">
+                            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h4 className="text-2xl font-bold text-light-text-primary dark:text-gray-100">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
+                              <h4 className="text-xl sm:text-2xl font-bold text-light-text-primary dark:text-gray-100 break-words">
                                 {caseStudy.title}
                               </h4>
-                              <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-gray-400">
-                                <FaClock className="w-4 h-4 hover-magnetic" />
-                                <span>{caseStudy.timeline}</span>
-                                <FaUsers className="w-4 h-4 ml-2 hover-magnetic" />
-                                <span>{caseStudy.teamSize} pessoa{caseStudy.teamSize > 1 ? 's' : ''}</span>
+                              <div className="flex items-center gap-2 text-xs sm:text-sm text-light-text-secondary dark:text-gray-400 flex-wrap">
+                                <div className="flex items-center gap-1">
+                                  <FaClock className="w-3 h-3 sm:w-4 sm:h-4 hover-magnetic flex-shrink-0" />
+                                  <span className="whitespace-nowrap">{caseStudy.timeline}</span>
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  <FaUsers className="w-3 h-3 sm:w-4 sm:h-4 hover-magnetic flex-shrink-0" />
+                                  <span className="whitespace-nowrap">{caseStudy.teamSize} pessoa{caseStudy.teamSize > 1 ? 's' : ''}</span>
+                                </div>
                               </div>
                             </div>
-                            <p className="text-light-text-secondary dark:text-gray-400 leading-relaxed mb-4">
+                            <p className="text-sm sm:text-base text-light-text-secondary dark:text-gray-400 leading-relaxed mb-4">
                               {caseStudy.overview}
                             </p>
                             {caseStudy.url && (
@@ -380,65 +398,76 @@ export default function Projects() {
                                 href={caseStudy.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold transition-colors hover-magnetic click-effect"
+                                className="inline-flex items-center gap-2 text-accent hover:text-accent-dark font-semibold transition-colors hover-magnetic click-effect text-sm sm:text-base"
                               >
-                                Ver Projeto <FaExternalLinkAlt className="w-4 h-4" />
+                                Ver Projeto <FaExternalLinkAlt className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                               </a>
                           )}
                         </div>
                       </div>
-                      <button
-                        onClick={() => toggleExpanded(caseStudy.id)}
-                        className="p-2 hover:bg-light-hover dark:hover:bg-dark-lighter rounded-lg transition-colors hover-lift click-effect"
-                      >
-                        {isExpanded ? (
-                          <FaChevronUp className="w-5 h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic" />
-                        ) : (
-                          <FaChevronDown className="w-5 h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic" />
-                        )}
-                      </button>
+                      <div className="flex flex-col items-center gap-2">
+                        <span
+                          className={`text-xs text-center font-medium transition-all duration-300 ease-in-out transform hover:scale-105 ${
+                            isExpanded 
+                              ? 'text-red-600 dark:text-red-400 font-semibold' 
+                              : 'text-blue-600 dark:text-blue-400 font-medium'
+                          }`}
+                        >
+                          {isExpanded ? 'Fechar' : 'Saiba Mais'}
+                        </span>
+                        <button
+                          onClick={() => toggleExpanded(caseStudy.id)}
+                          className="p-2 hover:bg-light-hover dark:hover:bg-dark-lighter rounded-lg transition-all duration-300 ease-in-out hover-lift click-effect transform hover:scale-105"
+                        >
+                          {isExpanded ? (
+                            <FaChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic transition-transform duration-300 ease-in-out" />
+                          ) : (
+                            <FaChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-light-text-secondary dark:text-gray-400 hover-magnetic transition-transform duration-300 ease-in-out animate-bounce" />
+                          )}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
                   {/* Conteúdo Expandido */}
                   {isExpanded && (
-                    <div className="p-6 space-y-8 animate-fade-in">
+                    <div className="p-4 sm:p-6 space-y-6 sm:space-y-8 animate-fade-in">
                       {/* Problema/Desafio */}
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <FaLightbulb className="w-5 h-5 text-red-500 hover-magnetic" />
-                          <h5 className="text-xl font-bold text-light-text-primary dark:text-gray-100">
+                          <FaLightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-red-500 hover-magnetic flex-shrink-0" />
+                          <h5 className="text-lg sm:text-xl font-bold text-light-text-primary dark:text-gray-100">
                             Problema/Desafio
                           </h5>
                         </div>
-                        <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg mb-4 hover-lift">
-                          <p className="text-light-text-secondary dark:text-gray-300 leading-relaxed">
+                        <div className="bg-red-50 dark:bg-red-900/20 p-3 sm:p-4 rounded-lg mb-4 hover-lift">
+                          <p className="text-sm sm:text-base text-light-text-secondary dark:text-gray-300 leading-relaxed">
                             {caseStudy.problem.context}
                           </p>
                         </div>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                           <div>
-                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                               Principais Desafios:
                             </h6>
                             <ul className="space-y-2">
                               {caseStudy.problem.challenges.map((challenge, index) => (
                                 <li key={index} className="flex items-start gap-2 hover-lift">
                                   <span className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
-                                  <span className="text-light-text-secondary dark:text-gray-400">{challenge}</span>
+                                  <span className="text-sm sm:text-base text-light-text-secondary dark:text-gray-400">{challenge}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <div>
-                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                               Stakeholders:
                             </h6>
                             <ul className="space-y-2">
                               {caseStudy.problem.stakeholders.map((stakeholder, index) => (
                                 <li key={index} className="flex items-center gap-2 hover-lift">
-                                  <FaUsers className="w-4 h-4 text-primary hover-magnetic" />
-                                  <span className="text-light-text-secondary dark:text-gray-400">{stakeholder}</span>
+                                  <FaUsers className="w-3 h-3 sm:w-4 sm:h-4 text-primary hover-magnetic flex-shrink-0" />
+                                  <span className="text-sm sm:text-base text-light-text-secondary dark:text-gray-400">{stakeholder}</span>
                                 </li>
                               ))}
                             </ul>
@@ -449,35 +478,35 @@ export default function Projects() {
                       {/* Processo de Desenvolvimento */}
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <FaCog className="w-5 h-5 text-blue-500" />
-                          <h5 className="text-xl font-bold text-light-text-primary dark:text-gray-100">
+                          <FaCog className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0" />
+                          <h5 className="text-lg sm:text-xl font-bold text-light-text-primary dark:text-gray-100">
                             Processo de Desenvolvimento
                           </h5>
                         </div>
                         <div className="mb-4">
-                          <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-semibold">
+                          <span className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-xs sm:text-sm font-semibold">
                             {caseStudy.development.methodology}
                           </span>
                         </div>
-                        <div className="grid lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                           <div>
-                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                               Fases do Projeto:
                             </h6>
                             <div className="space-y-4">
                               {caseStudy.development.phases.map((phase, index) => (
-                                <div key={index} className="border-l-4 border-blue-500 pl-4">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <h6 className="font-semibold text-light-text-primary dark:text-gray-200">
+                                <div key={index} className="border-l-4 border-blue-500 pl-3 sm:pl-4">
+                                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-2">
+                                    <h6 className="font-semibold text-light-text-primary dark:text-gray-200 text-sm sm:text-base">
                                       {phase.name}
                                     </h6>
-                                    <span className="text-sm text-light-text-secondary dark:text-gray-400">
+                                    <span className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-400">
                                       ({phase.duration})
                                     </span>
                                   </div>
                                   <ul className="space-y-1">
                                     {phase.activities.map((activity, actIndex) => (
-                                      <li key={actIndex} className="text-sm text-light-text-secondary dark:text-gray-400 flex items-start gap-2">
+                                      <li key={actIndex} className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-400 flex items-start gap-2">
                                         <FaCheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
                                         {activity}
                                       </li>
@@ -488,16 +517,16 @@ export default function Projects() {
                             </div>
                           </div>
                           <div>
-                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                               Decisões Técnicas Chave:
                             </h6>
                             <div className="space-y-4">
                               {caseStudy.development.keyDecisions.map((decision, index) => (
-                                <div key={index} className="bg-light-hover dark:bg-dark-lighter p-4 rounded-lg">
-                                  <h6 className="font-semibold text-light-text-primary dark:text-gray-200 block mb-2">
+                                <div key={index} className="bg-light-hover dark:bg-dark-lighter p-3 sm:p-4 rounded-lg">
+                                  <h6 className="font-semibold text-light-text-primary dark:text-gray-200 block mb-2 text-sm sm:text-base">
                                     {decision.decision}
                                   </h6>
-                                  <p className="text-sm text-light-text-secondary dark:text-gray-400">
+                                  <p className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-400">
                                     {decision.rationale}
                                   </p>
                                 </div>
@@ -510,23 +539,23 @@ export default function Projects() {
                       {/* Tecnologias */}
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <FaCode className="w-5 h-5 text-green-500" />
-                          <h5 className="text-xl font-bold text-light-text-primary dark:text-gray-100">
+                          <FaCode className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                          <h5 className="text-lg sm:text-xl font-bold text-light-text-primary dark:text-gray-100">
                             Tecnologias e Justificativas
                           </h5>
                         </div>
-                        <div className="grid md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                           {caseStudy.technologies.map((tech, index) => (
-                            <div key={index} className="bg-light-hover dark:bg-dark-lighter p-4 rounded-lg">
-                              <div className="flex items-center gap-3 mb-2">
-                                <span className="font-semibold text-light-text-primary dark:text-gray-200">
+                            <div key={index} className="bg-light-hover dark:bg-dark-lighter p-3 sm:p-4 rounded-lg">
+                              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                                <span className="font-semibold text-light-text-primary dark:text-gray-200 text-sm sm:text-base">
                                   {tech.name}
                                 </span>
-                                <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getTechCategoryColor(tech.category)}`}>
+                                <span className={`px-2 py-1 rounded-full text-xs font-semibold self-start ${getTechCategoryColor(tech.category)}`}>
                                   {tech.category}
                                 </span>
                               </div>
-                              <p className="text-sm text-light-text-secondary dark:text-gray-400">
+                              <p className="text-xs sm:text-sm text-light-text-secondary dark:text-gray-400">
                                 {tech.justification}
                               </p>
                             </div>
@@ -537,18 +566,18 @@ export default function Projects() {
                       {/* Resultados */}
                       <div>
                         <div className="flex items-center gap-3 mb-4">
-                          <FaChartLine className="w-5 h-5 text-green-500" />
-                          <h5 className="text-xl font-bold text-light-text-primary dark:text-gray-100">
+                          <FaChartLine className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+                          <h5 className="text-lg sm:text-xl font-bold text-light-text-primary dark:text-gray-100">
                             Resultados e Impacto
                           </h5>
                         </div>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
                           {caseStudy.results.metrics.map((metric, index) => (
-                            <div key={index} className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-4 rounded-lg text-center">
-                              <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
+                            <div key={index} className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 p-3 sm:p-4 rounded-lg text-center">
+                              <div className="text-xl sm:text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
                                 {metric.value}
                               </div>
-                              <div className="text-sm font-semibold text-light-text-primary dark:text-gray-200 mb-1">
+                              <div className="text-xs sm:text-sm font-semibold text-light-text-primary dark:text-gray-200 mb-1">
                                 {metric.label}
                               </div>
                               {metric.improvement && (
@@ -559,33 +588,44 @@ export default function Projects() {
                             </div>
                           ))}
                         </div>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                           <div>
-                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                            <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                               Principais Resultados:
                             </h6>
                             <ul className="space-y-2">
                               {caseStudy.results.outcomes.map((outcome, index) => (
                                 <li key={index} className="flex items-start gap-2">
-                                  <FaRocket className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                                  <span className="text-light-text-secondary dark:text-gray-400">{outcome}</span>
+                                  <FaRocket className="w-3 h-3 sm:w-4 sm:h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                                  <span className="text-sm sm:text-base text-light-text-secondary dark:text-gray-400">{outcome}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
                           {caseStudy.results.userFeedback && (
                             <div>
-                              <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3">
+                              <h6 className="font-semibold text-light-text-primary dark:text-gray-200 mb-3 text-sm sm:text-base">
                                 Feedback do Cliente:
                               </h6>
-                              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500">
-                                <p className="text-light-text-secondary dark:text-gray-300 italic">
+                              <div className="bg-blue-50 dark:bg-blue-900/20 p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
+                                <p className="text-sm sm:text-base text-light-text-secondary dark:text-gray-300 italic">
                                   "{caseStudy.results.userFeedback}"
                                 </p>
                               </div>
                             </div>
                           )}
                         </div>
+                      </div>
+
+                      {/* Botão de Fechamento */}
+                      <div className="flex justify-center pt-4 sm:pt-6 border-t border-light-border dark:border-dark-border">
+                        <button
+                          onClick={() => toggleExpanded(caseStudy.id)}
+                          className="flex items-center gap-2 px-4 py-2 bg-light-hover dark:bg-dark-lighter hover:bg-primary/10 dark:hover:bg-primary/10 rounded-lg transition-colors hover-lift click-effect text-light-text-secondary dark:text-gray-400 hover:text-primary dark:hover:text-primary"
+                        >
+                          <FaChevronUp className="w-4 h-4 hover-magnetic" />
+                          <span className="text-sm font-medium">Fechar Detalhes</span>
+                        </button>
                       </div>
                     </div>
                   )}
