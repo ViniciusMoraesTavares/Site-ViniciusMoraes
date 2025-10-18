@@ -31,6 +31,23 @@
     @apply scroll-smooth;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Compensar altura da navegação */
+  }
+
+  /* Smooth scroll personalizado com curva de easing */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    .smooth-scroll {
+      scroll-behavior: smooth;
+      scroll-snap-type: y proximity;
+    }
+  }
+
   body {
     @apply font-body transition-colors duration-300;
     background-color: rgb(var(--color-bg));

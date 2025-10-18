@@ -5,11 +5,29 @@ import { useTheme } from '../contexts/ThemeContext';
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('inicio');
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Detectar seção ativa
+      const sections = ['inicio', 'sobre', 'trajetoria', 'projetos', 'tecnologias', 'contato'];
+      const scrollPosition = window.scrollY + 100;
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -27,15 +45,18 @@ export default function Navigation() {
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    element?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
     setIsOpen(false);
   };
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-1 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         scrolled 
-          ? 'bg-light-bg/95 dark:bg-dark/95 backdrop-blur-lg shadow-lg border-b border-light-border dark:border-dark-border' 
+          ? 'bg-light-bg/95 dark:bg-dark/95 backdrop-blur-xl shadow-xl border-b border-light-border/50 dark:border-dark-border/50' 
           : 'bg-transparent'
       }`}
     >
@@ -54,20 +75,31 @@ export default function Navigation() {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="text-light-text-secondary dark:text-gray-300 hover:text-primary font-medium transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const sectionId = item.href.replace('#', '');
+              const isActive = activeSection === sectionId;
+              
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                  }}
+                  className={`font-medium transition-all duration-300 relative group ${
+                    isActive 
+                      ? 'text-primary' 
+                      : 'text-light-text-secondary dark:text-gray-300 hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300 ${
+                    isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
+                </a>
+              );
+            })}
             
             {/* Theme Toggle Button */}
             <button
@@ -100,6 +132,7 @@ export default function Navigation() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-light-text-secondary dark:text-gray-300 hover:text-primary transition-colors"
+              aria-label="Menu de navegação"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -107,25 +140,37 @@ export default function Navigation() {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-light-card dark:bg-dark-lighter border-t border-light-border dark:border-dark-border">
+      {/* Mobile Menu */}
+      <div className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+        isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      }`}>
+        <div className="bg-light-card/95 dark:bg-dark-lighter/95 backdrop-blur-xl border-t border-light-border/50 dark:border-dark-border/50">
           <div className="px-6 py-4 space-y-4">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }}
-                className="block text-light-text-secondary dark:text-gray-300 hover:text-primary font-medium transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              const sectionId = item.href.replace('#', '');
+              const isActive = activeSection === sectionId;
+              
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.href);
+                  }}
+                  className={`block font-medium transition-colors duration-300 ${
+                    isActive 
+                      ? 'text-primary' 
+                      : 'text-light-text-secondary dark:text-gray-300 hover:text-primary'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

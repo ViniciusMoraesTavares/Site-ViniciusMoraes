@@ -6,12 +6,16 @@ import Projects from './components/Projects';
 import Technologies from './components/Technologies';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollProgress from './components/ScrollProgress';
+import BackToTop from './components/BackToTop';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-light-bg dark:bg-dark transition-colors duration-300">
+        <ScrollProgress />
+        
         <Navigation />
         <Hero />
         <About />
@@ -20,6 +24,7 @@ function App() {
         <Technologies />
         <Contact />
         <Footer />
+        <BackToTop />
       </div>
     </ThemeProvider>
   );
