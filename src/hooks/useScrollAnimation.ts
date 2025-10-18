@@ -82,50 +82,106 @@ export const useScrollProgress = () => {
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number>();
   const lastProgressRef = useRef(0);
+  const targetProgressRef = useRef(0);
+  const isRunningRef = useRef(false);
 
   useEffect(() => {
-    let ticking = false;
+    const lerp = (start: number, end: number, factor: number) => {
+      return start + (end - start) * factor;
+    };
+
+    const calculateProgress = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      return scrollHeight > 0 ? Math.min(Math.max((scrollTop / scrollHeight) * 100, 0), 100) : 0;
+    };
 
     const updateProgress = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.pageYOffset;
-      const currentProgress = totalHeight > 0 ? Math.min((scrolled / totalHeight) * 100, 100) : 0;
+      const currentProgress = calculateProgress();
+      targetProgressRef.current = currentProgress;
       
-      // Smooth interpolation for fluid animation
-      const smoothProgress = lastProgressRef.current + (currentProgress - lastProgressRef.current) * 0.1;
-      lastProgressRef.current = smoothProgress;
+      // Use lerp for smooth interpolation, but with faster response for immediate feedback
+      const lerpFactor = 0.15; // Increased from 0.1 for more responsiveness
+      const smoothProgress = lerp(lastProgressRef.current, targetProgressRef.current, lerpFactor);
       
-      setProgress(smoothProgress);
-      ticking = false;
-    };
+      // Only update if there's a meaningful difference to avoid unnecessary renders
+      if (Math.abs(smoothProgress - lastProgressRef.current) > 0.01) {
+        lastProgressRef.current = smoothProgress;
+        setProgress(smoothProgress);
+      }
 
-    const handleScroll = () => {
-      if (!ticking) {
+      // Continue the animation loop
+      if (isRunningRef.current) {
         rafRef.current = requestAnimationFrame(updateProgress);
-        ticking = true;
       }
     };
 
-    // Throttled resize handler for responsive behavior
-    const handleResize = () => {
-      if (!ticking) {
+    const startAnimationLoop = () => {
+      if (!isRunningRef.current) {
+        isRunningRef.current = true;
         rafRef.current = requestAnimationFrame(updateProgress);
-        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleResize, { passive: true });
-    
-    // Initial calculation
-    updateProgress();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+    const stopAnimationLoop = () => {
+      isRunningRef.current = false;
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
       }
+    };
+
+    // Event handlers for different scroll triggers
+    const handleScrollEvent = () => {
+      startAnimationLoop();
+    };
+
+    const handleResize = () => {
+      // Recalculate immediately on resize
+      const newProgress = calculateProgress();
+      targetProgressRef.current = newProgress;
+      lastProgressRef.current = newProgress;
+      setProgress(newProgress);
+      startAnimationLoop();
+    };
+
+    // Observer for dynamic content changes
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+
+    // Mutation observer for content changes
+    const mutationObserver = new MutationObserver(() => {
+      handleResize();
+    });
+
+    // Start observing
+    resizeObserver.observe(document.body);
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+
+    // Add event listeners
+    window.addEventListener('scroll', handleScrollEvent, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+    
+    // Initial calculation and start loop
+    const initialProgress = calculateProgress();
+    lastProgressRef.current = initialProgress;
+    targetProgressRef.current = initialProgress;
+    setProgress(initialProgress);
+    startAnimationLoop();
+
+    return () => {
+      stopAnimationLoop();
+      window.removeEventListener('scroll', handleScrollEvent);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
     };
   }, []);
 

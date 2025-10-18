@@ -840,10 +840,11 @@
     width: 100%;
     height: 3px;
     z-index: 9999;
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .scroll-progress-container:hover {
@@ -853,21 +854,11 @@
 
   .scroll-progress-bar {
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      #3b82f6 0%,
-      #1d4ed8 25%,
-      #2563eb 50%,
-      #1e40af 75%,
-      #1e3a8a 100%
-    );
+    /* Background and box-shadow are now controlled by the component */
     transform-origin: left center;
-    transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-      0 0 10px rgba(59, 130, 246, 0.3),
-      0 0 20px rgba(59, 130, 246, 0.1);
     position: relative;
     overflow: hidden;
+    border-radius: 0 2px 2px 0;
   }
 
   .scroll-progress-bar::before {
@@ -880,10 +871,11 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0.3) 50%,
       transparent 100%
     );
-    animation: scroll-shimmer 2s infinite;
+    animation: scroll-shimmer 3s infinite;
+    pointer-events: none;
   }
 
   @keyframes scroll-shimmer {
@@ -900,21 +892,17 @@
 
   /* Dark mode styles */
   .dark .scroll-progress-container {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .dark .scroll-progress-bar {
+  .dark .scroll-progress-bar::before {
     background: linear-gradient(
       90deg,
-      #60a5fa 0%,
-      #3b82f6 25%,
-      #2563eb 50%,
-      #1d4ed8 75%,
-      #1e40af 100%
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
     );
-    box-shadow: 
-      0 0 10px rgba(96, 165, 250, 0.4),
-      0 0 20px rgba(96, 165, 250, 0.2);
   }
 
   /* Responsive adjustments */
@@ -931,15 +919,19 @@
   /* High contrast mode support */
   @media (prefers-contrast: high) {
     .scroll-progress-bar {
-      background: #0066cc;
-      box-shadow: none;
+      background: #0066cc !important;
+      box-shadow: none !important;
+    }
+    
+    .scroll-progress-bar::before {
+      display: none;
     }
   }
 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     .scroll-progress-bar {
-      transition: width 0.1s linear;
+      transition: width 0.05s linear !important;
     }
     
     .scroll-progress-bar::before {

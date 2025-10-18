@@ -1,4 +1,4 @@
-import { Heart, Code2 } from 'lucide-react';
+import { Code2 } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,9 +13,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-2 text-light-text-secondary dark:text-gray-400 text-sm transition-colors duration-300">
-            <span>Desenvolvido com</span>
-            <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
-            <span>e muito café</span>
+            <span>Compilado com café, fé e uns palpites aleatórios da IA ☕⚡</span>
           </div>
 
           <div className="text-light-text-secondary dark:text-gray-500 text-sm transition-colors duration-300">
