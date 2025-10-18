@@ -3,25 +3,25 @@ import { Briefcase, GraduationCap, Rocket } from 'lucide-react';
 export default function Timeline() {
   const events = [
     {
+      year: '2023-2025',
+      title: 'Formação Acadêmica',
+      description: 'Curso de Análise e Desenvolvimento de Sistemas - Faculdade Claretiano.',
+      icon: GraduationCap,
+      color: 'from-purple-600 to-pink-600',
+    },
+    {
       year: '2023-2024',
       title: 'Estágio - Prefeitura de Rio Claro',
       description: 'Desenvolvimento e manutenção de sites institucionais, suporte técnico e participação em sistema em Node.js.',
       icon: Briefcase,
-      color: 'from-accent to-accent-dark',
+      color: 'from-emerald-600 to-teal-700',
     },
     {
-      year: '2024-Atual',
+      year: '2025-Atual',
       title: 'Desenvolvedor Full Stack - Myelin',
       description: 'Criação e manutenção de sistemas e sites institucionais utilizando Node.js, React, TypeScript, HTML, CSS, MySQL e PostgreSQL. Foco em automação de processos e deploys.',
       icon: Rocket,
-      color: 'from-primary to-primary-dark',
-    },
-    {
-      year: '2025',
-      title: 'Formação Acadêmica',
-      description: 'Conclusão do curso de Análise e Desenvolvimento de Sistemas - Faculdade Claretiano.',
-      icon: GraduationCap,
-      color: 'from-purple-500 to-pink-500',
+      color: 'from-blue-600 to-indigo-700',
     },
   ];
 
