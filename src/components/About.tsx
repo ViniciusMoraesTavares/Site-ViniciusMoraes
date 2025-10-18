@@ -105,21 +105,28 @@ export default function About() {
     }
   ];
 
-
   return (
-    <section id="sobre" className="py-24 bg-light-bg-secondary dark:bg-dark-lighter relative overflow-hidden transition-colors duration-300">
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 to-accent/20"></div>
-      </div>
+    <section id="sobre" className="py-20 bg-white dark:bg-gray-900 transition-colors duration-500 relative overflow-hidden">
+      {/* Padrões de fundo estratégicos para profundidade */}
+      <div className="absolute inset-0 depth-pattern-organic opacity-30 dark:opacity-60"></div>
+      <div className="absolute inset-0 texture-noise opacity-20 dark:opacity-40"></div>
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-blue-50/50 to-transparent dark:from-blue-900/20 dark:to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-purple-50/50 to-transparent dark:from-purple-900/20 dark:to-transparent"></div>
+      
+      {/* Elementos de profundidade com camadas */}
+      <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-blue-100/30 dark:bg-primary/10 rounded-full blur-3xl depth-layer-1"></div>
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-100/20 dark:bg-accent/5 rounded-full blur-3xl depth-layer-2"></div>
+      <div className="absolute top-1/2 right-1/6 w-48 h-48 bg-indigo-100/25 dark:bg-primary/8 rounded-full blur-2xl depth-layer-3"></div>
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <AnimatedSection animation="fade-in" delay={100}>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
-              Quem é o <span className="text-gradient">Vini</span>
+            <h2 className="text-display-md mb-6">
+              <span className="gradient-text-primary">Sobre Mim</span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
+            <p className="text-heading-md text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-500">
+              Desenvolvedor apaixonado por criar soluções que fazem a diferença
+            </p>
           </div>
         </AnimatedSection>
 
@@ -129,11 +136,11 @@ export default function About() {
           <AnimatedSection animation="slide-in-left" delay={200}>
             <div className="order-2 lg:order-1 flex justify-center">
               <div className="relative hover-lift">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-lg opacity-30 scale-105"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-lg opacity-20 dark:opacity-40 scale-105 transition-opacity duration-500"></div>
                 <img
                   src="/images/foto_vinicius.png"
                   alt="Vinicius Moraes Tavares"
-                  className="relative w-80 h-80 object-cover rounded-2xl shadow-2xl border-4 border-white dark:border-gray-800 hover-magnetic"
+                  className="relative w-80 h-80 object-cover rounded-2xl shadow-xl dark:shadow-2xl border-4 border-gray-200 dark:border-gray-700 hover-magnetic transition-all duration-500"
                 />
               </div>
             </div>
@@ -141,8 +148,8 @@ export default function About() {
 
           {/* Story */}
           <AnimatedSection animation="slide-in-right" delay={300}>
-            <div className="order-1 lg:order-2 space-y-6 text-lg text-light-text-secondary dark:text-gray-300 leading-relaxed transition-colors duration-300">
-              <p className="text-xl font-medium text-light-text-primary dark:text-white">
+            <div className="order-1 lg:order-2 space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-500">
+              <p className="text-xl font-medium text-gray-800 dark:text-white transition-colors duration-500">
                 Sou Vinicius, desenvolvedor full stack movido por <span className="text-primary font-semibold">curiosidade</span> e <span className="text-accent font-semibold">propósito</span>.
                 Mineiro e cruzeirense, desde criança exploro tecnologia como quem decifra um mistério, dos videogames ao código.
                 Hoje, transformo ideias em soluções reais, unindo <span className="text-primary font-semibold">criatividade</span>,
@@ -156,7 +163,7 @@ export default function About() {
         {/* Professional Values */}
         <div className="mb-20">
           <AnimatedSection animation="slide-in-up" delay={400}>
-            <h3 className="text-3xl font-bold text-center mb-12 text-light-text-primary dark:text-white">
+            <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-500">
               Meus <span className="text-gradient">Valores</span>
             </h3>
           </AnimatedSection>
@@ -169,10 +176,10 @@ export default function About() {
                   animation="scale-in"
                   delay={500 + (index * 100)}
                 >
-                  <div className="bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 hover-lift hover-tilt group text-center click-effect">
+                  <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-tilt group text-center click-effect shadow-sm dark:shadow-lg">
                     <Icon className={`w-12 h-12 ${value.color} mb-4 mx-auto group-hover:scale-110 transition-transform hover-magnetic`} />
-                    <h4 className="text-xl font-bold text-light-text-primary dark:text-gray-100 mb-2">{value.title}</h4>
-                    <p className="text-sm text-light-text-secondary dark:text-gray-400">{value.description}</p>
+                    <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-500">{value.title}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-500">{value.description}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -183,7 +190,7 @@ export default function About() {
         {/* Work Method */}
         <div className="mb-20">
           <AnimatedSection animation="slide-in-up" delay={900}>
-            <h3 className="text-3xl font-bold text-center mb-12 text-light-text-primary dark:text-white">
+            <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-500">
               Meu <span className="text-gradient">Método de Trabalho</span>
             </h3>
           </AnimatedSection>
@@ -197,15 +204,15 @@ export default function About() {
                   delay={1000 + (index * 150)}
                 >
                   <div className="relative">
-                    <div className="bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 hover-lift hover-border-expand group h-full click-effect">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-border-expand group h-full click-effect shadow-sm dark:shadow-lg">
                       <div className="flex items-center mb-4">
                         <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center text-white font-bold text-sm mr-3 hover-magnetic">
                           {method.step}
                         </div>
                         <Icon className={`w-6 h-6 ${method.color} group-hover:scale-110 transition-transform`} />
                       </div>
-                      <h4 className="text-lg font-bold text-light-text-primary dark:text-gray-100 mb-3">{method.title}</h4>
-                      <p className="text-sm text-light-text-secondary dark:text-gray-400 leading-relaxed">{method.description}</p>
+                      <h4 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3 transition-colors duration-500">{method.title}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed transition-colors duration-500">{method.description}</p>
                     </div>
                     {index < workMethod.length - 1 && (
                       <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2">
@@ -222,7 +229,7 @@ export default function About() {
         {/* Professional Timeline */}
         <div>
           <AnimatedSection animation="slide-in-up" delay={1600}>
-            <h3 className="text-3xl font-bold text-center mb-12 text-light-text-primary dark:text-white">
+            <h3 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white transition-colors duration-500">
               Minha <span className="text-gradient">Jornada</span>
             </h3>
           </AnimatedSection>
@@ -243,13 +250,13 @@ export default function About() {
                   >
                     <div className={`flex items-center ${isEven ? 'flex-row' : 'flex-row-reverse'}`}>
                       <div className={`w-1/2 ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                        <div className="bg-light-card dark:bg-dark p-6 rounded-xl border border-light-border dark:border-dark-border hover:border-primary/50 transition-all duration-300 hover-lift hover-tilt click-effect">
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-500 hover-lift hover-tilt click-effect shadow-sm dark:shadow-lg">
                           <div className={`flex items-center mb-3 ${isEven ? 'justify-end' : 'justify-start'}`}>
                             <Calendar className="w-4 h-4 text-primary mr-2 hover-magnetic" />
                             <span className="text-primary font-bold text-lg">{item.year}</span>
                           </div>
-                          <h4 className="text-xl font-bold text-light-text-primary dark:text-gray-100 mb-2">{item.title}</h4>
-                          <p className="text-light-text-secondary dark:text-gray-400 mb-3">{item.description}</p>
+                          <h4 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2 transition-colors duration-500">{item.title}</h4>
+                          <p className="text-gray-600 dark:text-gray-400 mb-3 transition-colors duration-500">{item.description}</p>
                           <div className={`flex items-center text-sm text-accent ${isEven ? 'justify-end' : 'justify-start'}`}>
                             <MapPin className="w-4 h-4 mr-1 hover-magnetic" />
                             {item.location}
@@ -258,7 +265,7 @@ export default function About() {
                       </div>
 
                       {/* Timeline dot */}
-                      <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center border-4 border-light-bg-secondary dark:border-dark-lighter hover-lift hover-magnetic">
+                      <div className="relative z-10 w-12 h-12 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 hover-lift hover-magnetic transition-all duration-500">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
 

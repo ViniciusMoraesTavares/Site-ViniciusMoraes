@@ -1,11 +1,5 @@
 # 📋 Checklist de Melhorias - Portfólio Vinícius Moraes
 
-### 🎭 Elementos 3D e Visuais
-- [ ] Adicionar elementos 3D sutis (sem exagerar)
-- [ ] Implementar background patterns para profundidade
-- [ ] Criar animações de scroll mais elaboradas
-- [ ] Adicionar efeitos de partículas no hero
-
 ### ⚡ Performance e Otimizações
 - [ ] Implementar lazy loading para imagens
 - [ ] Configurar code splitting

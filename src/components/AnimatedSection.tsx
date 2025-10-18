@@ -1,58 +1,46 @@
-import React from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { ReactNode } from 'react';
+import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 interface AnimatedSectionProps {
-  children: React.ReactNode;
-  animation?: 'slide-in-left' | 'slide-in-right' | 'slide-in-up' | 'slide-in-down' | 
-             'scale-in' | 'rotate-in' | 'flip-in-x' | 'flip-in-y' | 
-             'zoom-in' | 'bounce-in' | 'elastic-in' | 'fade-in' | 'fade-in-up';
+  children: ReactNode;
+  animation?: 'fade-in' | 'slide-in-left' | 'slide-in-right' | 'slide-in-up' | 'zoom-in' | 'reveal-up';
   delay?: number;
   className?: string;
   threshold?: number;
-  rootMargin?: string;
+  triggerOnce?: boolean;
 }
 
-export default function AnimatedSection({
-  children,
-  animation = 'fade-in-up',
-  delay = 0,
+export default function AnimatedSection({ 
+  children, 
+  animation = 'fade-in', 
+  delay = 0, 
   className = '',
   threshold = 0.1,
-  rootMargin = '0px'
+  triggerOnce = true
 }: AnimatedSectionProps) {
-  const { elementRef, isIntersecting } = useIntersectionObserver({
+  // Mapear animações antigas para novas
+  const animationMap: Record<string, string> = {
+    'fade-in': 'fade-in',
+    'slide-in-left': 'slide-left',
+    'slide-in-right': 'slide-right',
+    'slide-in-up': 'reveal-up',
+    'zoom-in': 'zoom-in',
+    'reveal-up': 'reveal-up'
+  };
+
+  const mappedAnimation = animationMap[animation] || 'fade-in';
+  
+  const { elementRef } = useScrollAnimation({
+    animationType: mappedAnimation as any,
+    delay,
     threshold,
-    rootMargin,
-    triggerOnce: true
+    triggerOnce
   });
 
-  const getAnimationClass = () => {
-    if (!isIntersecting) return '';
-    
-    const baseClass = `animate-${animation}`;
-    const delayClass = delay > 0 ? getDelayClass(delay) : '';
-    
-    return `${baseClass} ${delayClass}`.trim();
-  };
-
-  const getDelayClass = (delayMs: number) => {
-    if (delayMs <= 100) return 'delay-100';
-    if (delayMs <= 150) return 'delay-150';
-    if (delayMs <= 200) return 'delay-200';
-    if (delayMs <= 300) return 'delay-300';
-    if (delayMs <= 400) return 'delay-400';
-    if (delayMs <= 500) return 'delay-500';
-    if (delayMs <= 600) return 'delay-600';
-    if (delayMs <= 700) return 'delay-700';
-    if (delayMs <= 800) return 'delay-800';
-    if (delayMs <= 900) return 'delay-900';
-    return 'delay-1000';
-  };
-
   return (
-    <div
+    <div 
       ref={elementRef}
-      className={`${getAnimationClass()} ${className}`}
+      className={`scroll-animate ${className}`}
     >
       {children}
     </div>

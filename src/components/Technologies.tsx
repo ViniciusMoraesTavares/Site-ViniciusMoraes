@@ -53,20 +53,22 @@ export default function Technologies() {
   ];
 
   return (
-    <section id="tecnologias" className="py-24 gradient-cool relative overflow-hidden">
-      <div className="absolute inset-0 texture-dots opacity-20"></div>
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/30 rounded-full blur-3xl"></div>
+    <section id="tecnologias" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 relative overflow-hidden transition-colors duration-500">
+      <div className="absolute inset-0 opacity-10 dark:opacity-20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(59,130,246,0.3)_1px,_transparent_0)] bg-[length:20px_20px] dark:bg-[radial-gradient(circle_at_1px_1px,_rgba(59,130,246,0.5)_1px,_transparent_0)]"></div>
+      </div>
+      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-200/40 dark:bg-primary/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/30 dark:bg-accent/15 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <AnimatedSection animation="slide-in-up" delay={100}>
           <div className="text-center mb-16">
-            <h2 className="text-heading-xl mb-4 text-light-text-primary dark:text-white transition-colors duration-300">
+            <h2 className="text-heading-xl mb-4 text-gray-800 dark:text-white transition-colors duration-500">
               Stack e <span className="gradient-text-accent">Ferramentas</span>
             </h2>
-            <div className="w-24 h-1 gradient-border mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full"></div>
           </div>
         </AnimatedSection>
 
@@ -80,13 +82,13 @@ export default function Technologies() {
                 delay={200 + (index * 150)}
               >
                 <div
-                  className={`glass-card glass-card-dark padding-xl rounded-2xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-300 hover-lift hover-border-expand`}
+                  className={`bg-white/80 dark:bg-gray-800/90 backdrop-blur-sm p-8 rounded-2xl border ${stack.borderColor} hover:border-opacity-100 transition-all duration-500 hover-lift hover-border-expand shadow-lg dark:shadow-xl`}
                 >
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="p-3 glass-button rounded-lg transition-colors duration-300 hover-magnetic">
+                    <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg transition-colors duration-500 hover-magnetic">
                       <Icon className={`w-8 h-8 ${stack.color}`} />
                     </div>
-                    <h3 className="text-heading-md text-light-text-primary dark:text-gray-100 transition-colors duration-300">{stack.category}</h3>
+                    <h3 className="text-heading-md text-gray-800 dark:text-gray-100 transition-colors duration-500">{stack.category}</h3>
                   </div>
 
                   <div className="space-y-md">
@@ -96,13 +98,13 @@ export default function Technologies() {
                         animation="scale-in"
                         delay={400 + (index * 150) + (i * 100)}
                       >
-                        <div className="group glass-button padding-md rounded-lg border border-light-border dark:border-dark-border hover:border-primary/30 transition-all duration-300 cursor-pointer hover-tilt click-effect">
+                        <div className="group bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-primary/30 dark:hover:border-primary/50 transition-all duration-500 cursor-pointer hover-tilt click-effect shadow-sm dark:shadow-md">
                           <div className="flex items-start justify-between">
                             <div>
-                              <h4 className="text-body-lg font-bold text-light-text-primary dark:text-gray-100 mb-1 group-hover:text-primary transition-colors">
+                              <h4 className="text-body-lg font-bold text-gray-800 dark:text-gray-100 mb-1 group-hover:text-primary transition-colors duration-500">
                                 {tech.name}
                               </h4>
-                              <p className="text-caption text-light-text-secondary dark:text-gray-400 transition-colors duration-300">{tech.description}</p>
+                              <p className="text-caption text-gray-600 dark:text-gray-400 transition-colors duration-500">{tech.description}</p>
                             </div>
                           </div>
                         </div>
