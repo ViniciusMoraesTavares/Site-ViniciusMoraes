@@ -4,13 +4,6 @@
 
 ## 🎯 Média Prioridade
 
-### 📖 Storytelling na Seção About
-- [ ] Expandir descrição pessoal com mais profundidade
-- [ ] Adicionar foto profissional
-- [ ] Incluir seção "Como trabalho" ou "Meu processo"
-- [ ] Detalhar valores e filosofia de trabalho
-- [ ] Adicionar timeline pessoal/profissional mais rica
-
 ### 🧭 Melhorias de Navegação e UX
 - [ ] Implementar indicador de progresso de scroll
 - [ ] Criar navegação sticky mais intuitiva
