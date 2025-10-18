@@ -45,10 +45,19 @@ export default function Navigation() {
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
-    element?.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    } else {
+      // Fallback para scroll para o topo se o elemento não for encontrado
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
     setIsOpen(false);
   };
 

@@ -832,17 +832,123 @@
     transform: translateY(-8px) scale(1.02);
   }
 
-  /* Indicador de progresso de scroll */
-  .scroll-progress {
+  /* Scroll Progress - Professional & Smooth Implementation */
+  .scroll-progress-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-    transform-origin: left;
+    height: 3px;
     z-index: 9999;
-    transition: transform 0.1s ease-out;
+    background: rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-progress-container:hover {
+    height: 4px;
+    transition: height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      #3b82f6 0%,
+      #1d4ed8 25%,
+      #2563eb 50%,
+      #1e40af 75%,
+      #1e3a8a 100%
+    );
+    transform-origin: left center;
+    transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 0 10px rgba(59, 130, 246, 0.3),
+      0 0 20px rgba(59, 130, 246, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    animation: scroll-shimmer 2s infinite;
+  }
+
+  @keyframes scroll-shimmer {
+    0% {
+      left: -100%;
+    }
+    50% {
+      left: 100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  /* Dark mode styles */
+  .dark .scroll-progress-container {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .dark .scroll-progress-bar {
+    background: linear-gradient(
+      90deg,
+      #60a5fa 0%,
+      #3b82f6 25%,
+      #2563eb 50%,
+      #1d4ed8 75%,
+      #1e40af 100%
+    );
+    box-shadow: 
+      0 0 10px rgba(96, 165, 250, 0.4),
+      0 0 20px rgba(96, 165, 250, 0.2);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .scroll-progress-container {
+      height: 2px;
+    }
+    
+    .scroll-progress-container:hover {
+      height: 3px;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .scroll-progress-bar {
+      background: #0066cc;
+      box-shadow: none;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-progress-bar {
+      transition: width 0.1s linear;
+    }
+    
+    .scroll-progress-bar::before {
+      animation: none;
+    }
+    
+    .scroll-progress-container:hover {
+      transition: none;
+    }
   }
 
   /* Smooth scroll com momentum */

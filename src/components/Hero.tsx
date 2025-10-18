@@ -32,7 +32,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-light-bg via-light-bg-secondary to-light-accent dark:from-dark-bg dark:via-dark-lighter dark:to-dark-accent perspective-container">
+    <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-light-bg via-light-bg-secondary to-light-accent dark:from-dark-bg dark:via-dark-lighter dark:to-dark-accent perspective-container">
       {/* Sistema de Partículas Dinâmico */}
       <ParticleSystem
         particleCount={60}

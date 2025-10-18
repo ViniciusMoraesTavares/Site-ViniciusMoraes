@@ -80,18 +80,53 @@ export const useParallaxScroll = (speed: number = 0.5) => {
 
 export const useScrollProgress = () => {
   const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number>();
+  const lastProgressRef = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const updateProgress = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = (window.pageYOffset / totalHeight) * 100;
-      setProgress(Math.min(currentProgress, 100));
+      const scrolled = window.pageYOffset;
+      const currentProgress = totalHeight > 0 ? Math.min((scrolled / totalHeight) * 100, 100) : 0;
+      
+      // Smooth interpolation for fluid animation
+      const smoothProgress = lastProgressRef.current + (currentProgress - lastProgressRef.current) * 0.1;
+      lastProgressRef.current = smoothProgress;
+      
+      setProgress(smoothProgress);
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        rafRef.current = requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    };
+
+    // Throttled resize handler for responsive behavior
+    const handleResize = () => {
+      if (!ticking) {
+        rafRef.current = requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial call
+    window.addEventListener('resize', handleResize, { passive: true });
+    
+    // Initial calculation
+    updateProgress();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, []);
 
   return progress;
